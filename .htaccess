@@ -1,0 +1,9 @@
+RewriteEngine on
+
+# Redireciona /teste para ./App/backup.html
+RewriteRule ^teste$ /App/backup.html [L]
+
+# Se o arquivo ou diretório solicitado não existir, redireciona para index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /App/index.php [L]

@@ -1,0 +1,30 @@
+services:
+  quizload:
+    container_name: app
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    networks:
+      - rede_1
+  mysql:
+    image: mysql:8.3.0
+    container_name: container-mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    networks:
+      - rede_1
+
+volumes:
+  mysql-data:
+
+networks:
+  rede_1:
+    driver: bridge
