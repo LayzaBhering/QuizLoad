@@ -5,3 +5,15 @@ Options -Indexes
 RewriteRule ^teste$ ./Public/backup.html [L]
 
 RewriteRule ^$ ./index.php [L]
+
+<FilesMatch "\.(conf|env|yml|htaccess|.md*)$">
+	Deny from all
+</FilesMatch>
+
+<FilesMatch "^(Dockerfile|Makefile)$">
+	Deny from all
+</FilesMatch>
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./index.php [L]
