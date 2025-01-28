@@ -1,7 +1,7 @@
-RewriteEngine on
+RewriteEngine On
+RewriteBase /
+Options -Indexes
 
-RewriteRule ^teste$ /App/backup.html [L]
+RewriteRule ^teste$ ./Public/backup.html [L]
 
-RewriteCond ${REQUEST_URI} !-f
-RewriteCond ${REQUEST_URL} !-d
-RewriteRule ^$ /App/index.php [L]
+RewriteRule ^$ ./index.php [L]
