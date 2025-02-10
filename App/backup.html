@@ -4,20 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - QuizLoad</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-    <section id="container-main-header">
-        <header id="container-header">
-            <h1 id="Title-header">QuizLoad</h1>
-            <nav id="nav-header">
-                <li class="li-nav"><a class="a-nav-main">Home</a></li>
-                <li class="li-nav"><a class="a-nav-main">Categorizar</a></li>
-            </nav>
-        </header>
-    </section>
+    <header id="container-header">
+        <nav id="nav-header">
+            <button class="inOutput">
+                <span class="material-symbols-outlined">arrow_upward</span>
+            </button>
+            <button class="inOutput">
+                <span class="material-symbols-outlined">arrow_downward</span>
+            </button>
+        </nav>
+    </header>
     <section id="conatiner-questions">
+        <section id="logo">
+            <div id="div-logo">
+                <h1 id="h1-logo">QuizLoad</h1>
+            </div>
+        </section>
+        <section id="container-options">
+            <section class="options">
+                <section class="option">
+                    <p>Questões</p>
+                </section>
+                <input type="number" class="option-input">
+            </section>
 
+            <section class="options">
+                <section class="option">
+                    <p>Alternativas</p>
+                </section>
+                <input type="number" class="option-input">
+            </section>
+
+        </section>
     </section>
 </body>
 </html>
