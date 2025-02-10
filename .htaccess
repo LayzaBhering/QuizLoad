@@ -1,9 +1,19 @@
-RewriteEngine on
+RewriteEngine On
+RewriteBase /
+Options -Indexes
 
-# Redireciona /teste para ./App/backup.html
-RewriteRule ^teste$ /App/backup.html [L]
+RewriteRule ^teste$ ./Public/backup.html [L]
 
-# Se o arquivo ou diretório solicitado não existir, redireciona para index.php
+RewriteRule ^$ ./index.php [L]
+
+<FilesMatch "\.(conf|env|yml|htaccess|.md*)$">
+	Deny from all
+</FilesMatch>
+
+<FilesMatch "^(Dockerfile|Makefile)$">
+	Deny from all
+</FilesMatch>
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /App/index.php [L]
+RewriteRule ^(.*)$ ./index.php [L]
