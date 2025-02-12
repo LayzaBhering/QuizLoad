@@ -3,21 +3,32 @@
     <head>
         <title>TESTE</title>
         <meta charset="UTF-8">
+        <link ref="stylesheet" href="Public/home.css">
         <link rel="stylesheet" href="Public/bootstrap/css/bootstrap.min.css">
+        <script defer src="Public/bootstrap/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-    <body>
-        <div class="container d-flex flex-column py-2 mt-5" style="background-color: #BBBAC6; border-radius: 30px">
-            <div class="p-1 my-3" style="background-color: #E2E2E2; border-radius: 30px">
-                <span>teste1</span>
-            </div>
-            <div class="p-1 my-3" style="background-color: #E2E2E2; border-radius: 30px">
-                <span>teste1</span>
-            </div>
+    <body style="background-color: #353531">
+
+        <!-- Caixa de alerta --> 
+        <div class="alert alert-warning alert-dismissible" style="display: none; position: absolute; top: 0; right: 0; width: 15%">
+            teste
+            <button class="btn-close" data-bs-dismiss="alert"></button>
         </div>
 
-        <div class="mh-100 mw-100 bg-primary d-flex-inline" style="height: 500px">
-            <div class="align-self-center">
-                <p>teste</p>
+        <!-- Campo de perguntas -->
+        <div class="container d-flex flex-column py-2 mt-5" style="background-color: #BBBAC6; border-radius: 30px">
+            <!-- Campo da pergunta -->
+            <div class="p-1 my-3 d-flex" style="background-color: #E2E2E2; border-radius: 30px">
+                <!-- Título da pergunta -->
+                <div class="col align-self-center px-3">
+                    <span>Atividade sobre PHP</span>
+                </div>
+                <!-- Informações sobre a pergunta -->
+                <div class="col-6 px-3">
+                    <span class="d-block informacoes-texto">Quantidade de Questões: xx</span>
+                    <span style="font-size: 11px">Última Tentativa: xx</span>
+                </div>
             </div>
         </div>
 
