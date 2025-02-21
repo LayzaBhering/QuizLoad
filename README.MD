@@ -1,7 +1,5 @@
-*OBJETIVO*
+O QuizLoad é uma aplicação desenvolvida para testar. Com ele, você pode criar, salvar e acessar suas atividades facilmente a partir de qualquer dispositivo conectado à mesma rede local (LAN).
 
-É um sistema que é alimentado pelo usuário e gera questões da seguinte maneira: 
+# Status do Projeto
 
-O usuário importa um arquivo CSV que contenha as configurações, questões e alternativas. Caso contrário, adiciona as mesmas manualmente.
-
-O sistema processa esse arquivo e envia perguntas na tela do usuário de acordo com o contexto do arquivo.
+🚧 Em desenvolvimento 🚧
