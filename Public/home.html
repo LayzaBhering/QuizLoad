@@ -3,34 +3,38 @@
     <head>
         <title>TESTE</title>
         <meta charset="UTF-8">
-        <link ref="stylesheet" href="Public/home.css">
+        <link rel="stylesheet" href="Public/home.css">
         <link rel="stylesheet" href="Public/bootstrap/css/bootstrap.min.css">
         <script defer src="Public/bootstrap/js/bootstrap.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body style="background-color: #353531">
 
+
         <!-- Caixa de alerta --> 
         <div class="alert alert-warning alert-dismissible" style="display: none; position: absolute; top: 0; right: 0; width: 15%">
             teste
             <button class="btn-close" data-bs-dismiss="alert"></button>
         </div>
+        
+        <div class="container bg-dark">
+            <p>teste</p>
+        </div>
 
         <!-- Campo de perguntas -->
-        <div class="container d-flex flex-column py-2 mt-5" style="background-color: #BBBAC6; border-radius: 30px">
+        <div class="container d-flex flex-column py-2 mt-5 rounded-4" style="background-color: #BBBAC6">
             <!-- Campo da pergunta -->
-            <div class="p-1 my-3 d-flex" style="background-color: #E2E2E2; border-radius: 30px">
+            <div class="p-1 my-1 d-flex rounded-4" style="background-color: #E2E2E2">
                 <!-- Título da pergunta -->
-                <div class="col align-self-center px-3">
-                    <span>Atividade sobre PHP</span>
+                <div class="col-7 align-self-center px-2 pe-3 titulo-pergunta">
+                    <small class="fs-6">Atividade sobre PHP</small>
                 </div>
                 <!-- Informações sobre a pergunta -->
-                <div class="col-6 px-3">
-                    <span class="d-block informacoes-texto">Quantidade de Questões: xx</span>
-                    <span style="font-size: 11px">Última Tentativa: xx</span>
+                <div class="col-5 px-2 align-self-center">
+                    <small class="d-block descricao-pergunta">Quantidade: xx</small>
+                    <small style="font-size: 10px descricao-pergunta">Última Tentativa: xx</small>
                 </div>
             </div>
         </div>
-
     </body>
 </html>
