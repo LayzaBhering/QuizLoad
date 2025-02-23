@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="Public/home.css">
         <link rel="stylesheet" href="Public/bootstrap/css/bootstrap.min.css">
         <script defer src="Public/bootstrap/js/bootstrap.min.js"></script>
+        <script defer src="Public/home.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body style="background-color: #353531">
@@ -19,33 +20,45 @@
         
         <!-- Campo de menu -->
         <div class="container d-flex mt-3 px-1">
-            <div class="col-7 rounded-4 d-flex justify-content-around opacity-25" style="background-color: #BBBAC6">
-                <img class="p-3" src="Public/Icones/fechar.svg" onclick="alert('teste')"></img>
-                <img class="p-3" src="Public/Icones/iniciar.svg"></img>
-                <img class="p-3" src="Public/Icones/editar.svg"></img>
-                <img class="p-3" src="Public/Icones/download.svg"></img>
+            <div class="col-7 rounded-4 d-flex justify-content-around opacity-25" id="opcoes-pergunta-selecionada" style="background-color: #BBBAC6">
+                <img class="p-3 icones clicavel" src="Public/Icones/fechar.svg"></img>
+                <img class="p-3 icones clicavel" src="Public/Icones/iniciar.svg"></img>
+                <img class="p-3 icones clicavel" src="Public/Icones/editar.svg"></img>
+                <img class="p-3 icones clicavel" src="Public/Icones/download.svg"></img>
             </div>
             <div class="d-flex py-1 px-1 py-md-3 col-1 invisible">
                 <small>achou ksksksk</small>
             </div>
             <div class="col-4 ms-auto rounded-4 d-flex justify-content-around" style="background-color: #BBBAC6">
-                <img class="p-3" src="Public/Icones/adicionar.svg"></img>
-                <img class="p-3" src="Public/Icones/upload.svg"></img>
+                <img class="p-3 icones clicavel" src="Public/Icones/adicionar.svg"></img>
+                <img class="p-3 icones clicavel" src="Public/Icones/upload.svg"></img>
             </div>
         </div>
 
         <!-- Campo de perguntas -->
         <div class="container d-flex flex-column py-2 mt-5 rounded-4" style="background-color: #BBBAC6">
             <!-- Campo da pergunta -->
-            <div class="p-1 my-1 d-flex rounded-4" style="background-color: #E2E2E2">
+            <div class="p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel" data-id="1" style="background-color: #E2E2E2">
                 <!-- Título da pergunta -->
-                <div class="col-7 align-self-center px-2 pe-3 titulo-pergunta">
+                <div class="col-7 align-self-center px-2 pe-3">
                     <small class="fs-6">Atividade sobre PHP</small>
                 </div>
                 <!-- Informações sobre a pergunta -->
                 <div class="col-5 px-2 align-self-center">
-                    <small class="d-block descricao-pergunta">Quantidade: xx</small>
-                    <small style="font-size: 10px descricao-pergunta">Última Tentativa: xx</small>
+                    <small class="d-block">Quantidade: xx</small>
+                    <small>Última Tentativa: xx</small>
+                </div>
+            </div>
+            <!-- Campo da pergunta -->
+            <div class="p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel" data-id="1" style="background-color: #E2E2E2">
+                <!-- Título da pergunta -->
+                <div class="col-7 align-self-center px-2 pe-3">
+                    <small class="fs-6">Atividade sobre PHP</small>
+                </div>
+                <!-- Informações sobre a pergunta -->
+                <div class="col-5 px-2 align-self-center">
+                    <small class="d-block">Quantidade: xx</small>
+                    <small>Última Tentativa: xx</small>
                 </div>
             </div>
         </div>
