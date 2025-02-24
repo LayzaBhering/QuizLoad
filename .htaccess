@@ -2,8 +2,6 @@ RewriteEngine On
 RewriteBase /
 Options -Indexes
 
-RewriteRule ^teste$ ./Public/backup.html [L]
-
 RewriteRule ^$ ./index.php [L]
 
 <FilesMatch "\.(conf|env|yml|htaccess|.md*)$">
