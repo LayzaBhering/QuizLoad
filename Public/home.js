@@ -13,12 +13,7 @@ let funcao_selecionar_campo_pergunta = function(elemento_atual){
 		elemento_campo_pergunta_selecionado = elemento_atual;
 		opcoes_elemento_selecionado.classList.remove("opacity-25");
 	}
-	else if(elemento_campo_pergunta_selecionado == elemento_atual){
-		elemento_atual.classList.remove("border");
-		elemento_campo_pergunta_selecionado = false;
-		opcoes_elemento_selecionado.classList.add("opacity-25");
-	}
-	else{
+	else if(elemento_campo_pergunta_selecionado != elemento_atual){
 		elemento_campo_pergunta_selecionado.classList.remove("border");
 		elemento_campo_pergunta_selecionado = elemento_atual;
 		opcoes_elemento_selecionado.classList.remove("opacity-25");
@@ -30,14 +25,13 @@ let funcao_selecionar_campo_pergunta = function(elemento_atual){
 // Adicionando evento nos ícones
 icones[0].addEventListener("click", ()=>{
 	if(elemento_campo_pergunta_selecionado != false){
-		funcao_selecionar_campo_pergunta(elemento_campo_pergunta_selecionado);
+		elemento_campo_pergunta_selecionado.classList.remove("border");
+		elemento_campo_pergunta_selecionado = false;
 	}
 });
 
 icones[1].addEventListener("click", ()=>{
-	if(elemento_campo_pergunta_selecionado != false){
-		funcao_selecionar_campo_pergunta(elemento_campo_pergunta_selecionado);
-	}
+	// Irei implementar
 });
 
 // Adicionando evento nos campo de perguntas
