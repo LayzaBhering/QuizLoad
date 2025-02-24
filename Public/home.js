@@ -26,6 +26,7 @@ let funcao_selecionar_campo_pergunta = function(elemento_atual){
 icones[0].addEventListener("click", ()=>{
 	if(elemento_campo_pergunta_selecionado != false){
 		elemento_campo_pergunta_selecionado.classList.remove("border");
+		opcoes_elemento_selecionado.classList.add("opacity-25");
 		elemento_campo_pergunta_selecionado = false;
 	}
 });
