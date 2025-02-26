@@ -41,11 +41,24 @@
 <?php
 $teste = "teste";
 $html_atividades="";
-for($contador = 0; $contador < count($database->atividades); $contador++){
-    $temporaria_texto = $database->atividades[$contador]["Texto_Atividade"];
-    $temporaria_quantidade = $database->atividades[$contador]["Quantidade_Perguntas"];
-    $temporaria_ultima_tentativa = date("d/m/Y", strtotime($database->atividades[$contador]["Ultima_Tentativa"]));
+
+if(count($database->atividades) == 0){
     $html_atividades.=<<<ATIVIDADE
+            <div class='p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel' data-id='1' style='background-color: #E2E2E2'>
+                <!-- Título da pergunta -->
+                <div class='col-8 align-self-center px-2 pe-3'>
+                    <span class='h3'>Você ainda não tem perguntas, adicione!</span>
+                </div>
+            </div>
+    ATIVIDADE;   
+}
+
+else{
+    for($contador = 0; $contador < count($database->atividades); $contador++){
+        $temporaria_texto = $database->atividades[$contador]["Texto_Atividade"];
+        $temporaria_quantidade = $database->atividades[$contador]["Quantidade_Perguntas"];
+        $temporaria_ultima_tentativa = date("d/m/Y", strtotime($database->atividades[$contador]["Ultima_Tentativa"]));
+        $html_atividades.=<<<ATIVIDADE
             <div class='p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel' data-id='1' style='background-color: #E2E2E2'>
                 <!-- Título da pergunta -->
                 <div class='col-7 align-self-center px-2 pe-3'>
@@ -57,7 +70,8 @@ for($contador = 0; $contador < count($database->atividades); $contador++){
                     <small>Última Tentativa: $temporaria_ultima_tentativa</small>
                 </div>
             </div>
-    ATIVIDADE;
+        ATIVIDADE;
+    }
 }
 echo $html_atividades;
 
