@@ -42,7 +42,9 @@ class DataBase{
 		$this->conexao_banco_de_dados->query($sql);
 		$sql = "CREATE TABLE Perguntas (ID_Pergunta INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Atividade_Correspondente INTEGER, Texto_Pergunta VARCHAR (50));";
 		$this->conexao_banco_de_dados->query($sql);
-		$sql = "CREATE TABLE Alternativas (ID_Alternativa INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Pergunta_Correspondente INTEGER, Texto_Alternativa VARCHAR (50));";
+		$sql = "CREATE TABLE Alternativas (ID_Alternativa INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Pergunta_Correspondente INTEGER, Texto_Alternativa VARCHAR (50), Correta BOOL);";
+		$this->conexao_banco_de_dados->query($sql);
+		$sql = "CREATE TABLE Configuracoes (Tempo_Default INTEGER, Aleatoriedade_Perguntas_Default BOOL, Aleatoriedade_Alternativas_Default BOOL);";
 		$this->conexao_banco_de_dados->query($sql);
 	}
 
