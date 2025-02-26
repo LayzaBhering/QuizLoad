@@ -10,4 +10,4 @@ reset:
 
 zerar:
 	docker-compose down
-	docker volume rm back_mysql-data
+	docker volume rm quizload_mysql-data

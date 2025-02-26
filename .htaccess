@@ -2,8 +2,6 @@ RewriteEngine On
 RewriteBase /
 Options -Indexes
 
-RewriteRule ^$ ./index.php [L]
-
 <FilesMatch "\.(conf|env|yml|htaccess|.md*)$">
 	Deny from all
 </FilesMatch>
