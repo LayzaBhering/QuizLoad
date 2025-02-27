@@ -23,7 +23,7 @@ else if($diretorio_atual[1] == "quiz"){
 	require_once("Public/quiz.html");
 }
 else{
-	echo "<p> Outra página não home</p>";
+	require_once("Public/adicionar quiz.html");
 }
 
 ?>

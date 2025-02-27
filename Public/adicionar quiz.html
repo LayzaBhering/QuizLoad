@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>teste</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, inicial-scale=1">
+    <link rel="stylesheet" href="Public/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Public/adicionar quiz.css">
+		<script defer src="Public/adicionar quiz.js"></script>
+	</head>
+  <body style="background-color: #353531">
+
+ 		<!-- Campo do Quiz -->
+    <div class="container d-block py-2 mt-5 rounded-4" style="background-color: #BBBAC6">
+        <div class="d-flex mt-3 justify-content-center">
+            <p class="fs-1">Adicionar Questão N</p>
+        </div>
+        <p class="fs-5 text-center">Marque o checkbox para colocar a alternativa como correta (para remover a alternativa, basta deixar vazio)</p>
+        <div class="col-12 col-sm-10 mx-auto p-4 mt-4 rounded" style="background-color: #E2E2E2">
+            <p class="fs-4 clicavel" id="elemento-pergunta">Adicioner a pergunta aqui (clique aqui)</p>
+
+            <!-- Alternativas 1 e 2 -->
+            <div class="d-flex justify-content-between mt-5 w-100">
+                <div class="col-5 text-start clicavel">
+                    <p class="fs-5 elemento-alternativas">Adicione Alternativa 1</p>
+                    <img class="d-none h-25" src="Public/Icones/nocheck.png" style="width: auto; height: inherit">
+                    <label class="d-none fs-5 clicavel">Normal</label>
+                </div>
+                <div class="col-5 text-start clicavel">
+                    <p class="fs-5 elemento-alternativas">Adicione Alternativa 2</p>
+                    <img class="d-none h-25" src="Public/Icones/nocheck.png" style="width: auto; height: inherit">
+                    <label class="d-none fs-5 clicavel">Explicação</label>
+                </div>
+            </div>
+
+            <!-- Alternativas 3 e 4 -->
+            <div class="d-flex justify-content-between mt-5 w-100">
+                <div class="col-5 text-start clicavel">
+                    <p class="fs-5 elemento-alternativas">Adicione Alternativa 3</p>
+                    <img class="d-none h-25" src="Public/Icones/nocheck.png" style="width: auto; height: inherit">
+                    <label class="d-none fs-5 clicavel">Normal</label>
+                </div>
+                <div class="col-5 text-start clicavel">
+                    <p class="fs-5 elemento-alternativas">Adicione Alternativa 4</p>
+                    <img class="d-none h-25" src="Public/Icones/nocheck.png" style="width: auto; height: inherit">
+                    <label class="d-none fs-5 clicavel">Explicação</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	</body>
+</html>
