@@ -5,3 +5,4 @@ O QuizLoad é uma aplicação desenvolvida para testar seu conhecimento. Com ele
 🚧 Em desenvolvimento 🚧
 
 
+
