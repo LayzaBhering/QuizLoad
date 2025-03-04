@@ -5,5 +5,7 @@ let contador_alternativas = 0;
 let elementos_alternativa = document.getElementsByClassName("elemento-alternativas");
 
 // Adicionando eventos
-elemento_pergunta.addEventListener("click", function(){alert("clicou")});
+elemento_pergunta.addEventListener("click", function(this){
+	console.log(this);
+});
 elementos_alternativa[0].addEventListener("click", function(){alert("clicou")});

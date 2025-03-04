@@ -3,12 +3,24 @@ let icones = document.getElementsByClassName("icones");
 let campo_pergunta = document.getElementsByClassName("campo-pergunta");
 let opcoes_elemento_selecionado = document.getElementById("opcoes-pergunta-selecionada");
 
+let formulario_pop_up_adicionar_atividade = document.getElementById("formulario-popup-adicionar-atividade");
+let input_pop_up_adicionar_atividade = document.getElementById("input-adicionar-atividade");
+
+let pop_up = false;
+let elemento_caixa_popup = document.getElementById("caixa-popup");
+
 // Funções
 let elemento_campo_pergunta_selecionado = false;
 let funcao_selecionar_campo_pergunta = function(elemento_atual){
 	
-	elemento_atual.classList.add("border");
+	// Verificando se tem pergunta
+	if(campo_pergunta = "\n            \n            \n                "){
+		console.error("Sem perguntas");
+		return;
+	}
 
+	elemento_atual.classList.add("border");
+	
 	if(elemento_campo_pergunta_selecionado == false){
 		elemento_campo_pergunta_selecionado = elemento_atual;
 		opcoes_elemento_selecionado.classList.remove("opacity-25");
@@ -20,18 +32,51 @@ let funcao_selecionar_campo_pergunta = function(elemento_atual){
 	}
 }
 
+let funcao_mostrar_popup_adicionar_atividade = function(){
+	elemento_caixa_popup.style.display = "block";
+	pop_up = true;
+}
+
 // Adicionando evento aos elementos
 
 // Adicionando evento nos ícones
 icones[0].addEventListener("click", ()=>{
-	if(elemento_campo_pergunta_selecionado != false){
+	// Verificando se o popup está aberto
+	if(pop_up == true){
+		console.error("Pop Up aberto");
+		return;
+	}
+	// Verificando se tem pergunta selecionada
+	else if(elemento_campo_pergunta_selecionado != false){
 		elemento_campo_pergunta_selecionado.classList.remove("border");
 		opcoes_elemento_selecionado.classList.add("opacity-25");
 		elemento_campo_pergunta_selecionado = false;
 	}
 });
 
+// Ícones no menu
 icones[1].addEventListener("click", ()=>{
+	// Irei implementar
+});
+
+icones[2].addEventListener("click", ()=>{
+	// Irei implementar
+});
+
+icones[3].addEventListener("click", ()=>{
+	// Irei implementar
+});
+
+icones[4].addEventListener("click", ()=>{
+	// Verificando te sem popup aberto
+	if(pop_up == true){
+		console.error("Pop Up aberto");
+		return;
+	}
+	funcao_mostrar_popup_adicionar_atividade();
+});
+
+icones[5].addEventListener("click", ()=>{
 	// Irei implementar
 });
 
@@ -41,4 +86,14 @@ for(var contador=0; contador < campo_pergunta.length; contador++){
 	campo_pergunta[contador].addEventListener("click", function(){
 		funcao_selecionar_campo_pergunta(this);
 	});
+}
+
+// Adicionando evento no botão de enviar do pop-up (adicionar atividade)
+formulario_pop_up_adicionar_atividade.onsubmit = function(evento){
+	evento.preventDefault();
+	if(input_pop_up_adicionar_atividade.value == ""){
+		alert("Favor, inserir o nome antes de enviar");
+		return;
+	}
+	formulario_pop_up_adicionar_atividade.submit();
 }

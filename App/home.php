@@ -12,26 +12,37 @@
     <body style='background-color: #353531'>
 
 
-        <!-- Caixa de alerta --> 
-        <div class='alert alert-warning alert-dismissible' style='display: none; position: absolute; top: 0; right: 0; width: 15%'>
-            teste
-            <button class='btn-close' data-bs-dismiss='alert'></button>
+        <!-- Caixa de alerta adicionar atividade --> 
+        <div class='container my-5 p-4 border border-5 border-dark rounded-4' id="caixa-popup" style="position: absolute; background-color: #BBBAC6; top:0; left: 50%; transform: translateX(-50%); z-index:1000; display: none">
+            <div class="d-flex justify-content-center">
+                <div class="col-1">
+                    <img class='col-1 clicavel' src='Public/Icones/fechar.svg' style="min-width: 40px; max-width: 70px">
+                </div>        
+                <h2 class="col-11 p-4" id="elemento-titulo-popup">Adicione o Nome da Atividade</h2>
+            </div>
+            <form id="formulario-popup-adicionar-atividade" action="cadastrar-atividade" method="POST">
+                <div class="d-flex justify-content-between">
+                    <small class="col-2 p-3 fs-5">Nome:</small>
+                    <input class="col-10 p-3 fs-5 border 1 border-dark rounded-4" id="input-adicionar-atividade" type="text" name="titulo-atividade" style="background-color: E2E2E2">
+                </div>
+                <input type="submit" class="col-8 d-block mx-auto p-3 mt-5 rounded-5 d-flex justify-content-center fs-5 text-white clicavel" id="botao-adicionar-atividade" value="Enviar" style="border: none; background-color: #353531">
+            </form>
         </div>
         
         <!-- Campo de menu -->
         <div class='container d-flex mt-3 px-1'>
             <div class='col-7 rounded-4 d-flex justify-content-around opacity-25' id='opcoes-pergunta-selecionada' style='background-color: #BBBAC6'>
-                <img class='p-3 icones clicavel' src='Public/Icones/fechar.svg'></img>
-                <img class='p-3 icones clicavel' src='Public/Icones/iniciar.svg'></img>
-                <img class='p-3 icones clicavel' src='Public/Icones/editar.svg'></img>
-                <img class='p-3 icones clicavel' src='Public/Icones/download.svg'></img>
+                <img class='p-3 icones clicavel' src='Public/Icones/fechar.svg'>
+                <img class='p-3 icones clicavel' src='Public/Icones/iniciar.svg'>
+                <img class='p-3 icones clicavel' src='Public/Icones/editar.svg'>
+                <img class='p-3 icones clicavel' src='Public/Icones/download.svg'>
             </div>
             <div class='d-flex py-1 px-1 py-md-2 py-xxl-3 col-1 invisible'>
                 <small>achou ksksksk</small>
             </div>
             <div class='col-4 ms-auto rounded-4 d-flex justify-content-around' style='background-color: #BBBAC6'>
-                <img class='p-3 icones clicavel' src='Public/Icones/adicionar.svg'></img>
-                <img class='p-3 icones clicavel' src='Public/Icones/upload.svg'></img>
+                <img class='p-3 icones clicavel' src='Public/Icones/adicionar.svg'>
+                <img class='p-3 icones clicavel' src='Public/Icones/upload.svg'>
             </div>
         </div>
 

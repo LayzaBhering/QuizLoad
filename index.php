@@ -22,6 +22,9 @@ if($diretorio_atual[1] == ""){
 else if($diretorio_atual[1] == "quiz"){
 	require_once("Public/quiz.html");
 }
+else if($diretorio_atual[1] == "cadastrar-atividade"){
+	require_once("Public/adicionar quiz.html");
+}
 else{
 	require_once("Public/adicionar quiz.html");
 }

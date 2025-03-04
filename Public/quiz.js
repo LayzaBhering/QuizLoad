@@ -7,6 +7,7 @@ let duracao = document.getElementById("duracao");
 // Funções
 let modo_pergunta_selecionado = false;
 let funcao_modo_pergunta_selecionado = function(elemento_atual){
+	console.log(elemento_atual);
 	if(modo_pergunta_selecionado == false){
 		modo_pergunta_selecionado = elemento_atual;
 
