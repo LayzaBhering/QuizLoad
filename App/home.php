@@ -16,14 +16,14 @@
         <div class='container my-5 p-4 border border-5 border-dark rounded-4' id="caixa-popup" style="position: absolute; background-color: #BBBAC6; top:0; left: 50%; transform: translateX(-50%); z-index:1000; display: none">
             <div class="d-flex justify-content-center">
                 <div class="col-1">
-                    <img class='col-1 clicavel' src='Public/Icones/fechar.svg' style="min-width: 40px; max-width: 70px">
+                    <img class='col-1 pe-2 clicavel' id='botao-fechar-caixa-popup-atividade' src='Public/Icones/fechar.svg' style="min-width: 40px; max-width: 70px">
                 </div>        
-                <h2 class="col-11 p-4" id="elemento-titulo-popup">Adicione o Nome da Atividade</h2>
+                <h5 class="col-11 ps-4 mb-4" id="elemento-titulo-popup">Adicione o Nome da Atividade</h5>
             </div>
             <form id="formulario-popup-adicionar-atividade" action="cadastrar-atividade" method="POST">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mt-4">
                     <small class="col-2 p-3 fs-5">Nome:</small>
-                    <input class="col-10 p-3 fs-5 border 1 border-dark rounded-4" id="input-adicionar-atividade" type="text" name="titulo-atividade" style="background-color: E2E2E2">
+                    <input class="col-9 col-lg-10 p-3 fs-5 border 1 border-dark rounded-4" id="input-adicionar-atividade" type="text" name="titulo-atividade" style="background-color: E2E2E2">
                 </div>
                 <input type="submit" class="col-8 d-block mx-auto p-3 mt-5 rounded-5 d-flex justify-content-center fs-5 text-white clicavel" id="botao-adicionar-atividade" value="Enviar" style="border: none; background-color: #353531">
             </form>

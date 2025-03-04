@@ -8,6 +8,7 @@ let input_pop_up_adicionar_atividade = document.getElementById("input-adicionar-
 
 let pop_up = false;
 let elemento_caixa_popup = document.getElementById("caixa-popup");
+let botao_fechar_caixa_popup = document.getElementById("botao-fechar-caixa-popup-atividade");
 
 // Funções
 let elemento_campo_pergunta_selecionado = false;
@@ -32,9 +33,15 @@ let funcao_selecionar_campo_pergunta = function(elemento_atual){
 	}
 }
 
-let funcao_mostrar_popup_adicionar_atividade = function(){
-	elemento_caixa_popup.style.display = "block";
-	pop_up = true;
+let funcao_mostrar_ocultar_popup_adicionar_atividade = function(){
+	if(pop_up == false){
+		elemento_caixa_popup.style.display = "block";
+		pop_up = true;
+	}
+	else{
+		elemento_caixa_popup.style.display = "none";
+		pop_up = false;
+	}
 }
 
 // Adicionando evento aos elementos
@@ -73,7 +80,7 @@ icones[4].addEventListener("click", ()=>{
 		console.error("Pop Up aberto");
 		return;
 	}
-	funcao_mostrar_popup_adicionar_atividade();
+	funcao_mostrar_ocultar_popup_adicionar_atividade();
 });
 
 icones[5].addEventListener("click", ()=>{
@@ -90,10 +97,25 @@ for(var contador=0; contador < campo_pergunta.length; contador++){
 
 // Adicionando evento no botão de enviar do pop-up (adicionar atividade)
 formulario_pop_up_adicionar_atividade.onsubmit = function(evento){
+	if(pop_up == false){
+		console.error("Não é possível enviar, porque o pop-up de adicionar atividade não está aberto");
+		return;
+	}
 	evento.preventDefault();
 	if(input_pop_up_adicionar_atividade.value == ""){
 		alert("Favor, inserir o nome antes de enviar");
 		return;
 	}
 	formulario_pop_up_adicionar_atividade.submit();
+}
+
+// Adicionando evento no botão de fechar do pop-up (adicionar atividade)
+botao_fechar_caixa_popup.onclick = function(){
+	if(pop_up == false){
+		console.error("Não é possível fechar, porque o pop-up já está fechado");
+		return;
+	}
+	else{
+		funcao_mostrar_ocultar_popup_adicionar_atividade();
+	}
 }
