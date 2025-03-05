@@ -11,43 +11,114 @@
   <body style="background-color: #353531">
 
  		<!-- Campo do Quiz -->
-    <div class="container d-block py-2 mt-5 rounded-4" style="background-color: #BBBAC6">
-        <div class="d-flex mt-3 justify-content-center">
-            <p class="fs-1">Adicionar Questão N</p>
+    <form class="container d-block py-2 my-5 rounded-4" style="background-color: #BBBAC6">
+        <div class="d-flex px-1 mt-3 justify-content-center">
+            <p class="fs-1 px-xxl-5 text-center">Adicione as perguntas e alternatias do: Teste PHP</p>
         </div>
-        <p class="fs-5 text-center">Marque o checkbox para colocar a alternativa como correta (para remover a alternativa, basta deixar vazio)</p>
-        <div class="col-12 col-sm-10 mx-auto p-4 mt-4 rounded" style="background-color: #E2E2E2">
-            <p class="fs-4 clicavel" id="elemento-pergunta">Adicioner a pergunta aqui (clique aqui)</p>
+        <p class="fs-1 px-xxl-5 text-center">(Questão 10)</p>
+        <p class="fs-5 px-1 text-center">Marque o checkbox para colocar a alternativa como correta (para remover a alternativa, basta deixar vazio)</p>
+        <div class="col-12 col-sm-10 mx-auto p-4 my-4 rounded" id="elemento-pergunta" style="background-color: #E2E2E2">
+            <p class="fs-4 p-2 text-break clicavel" id="elemento-pergunta-texto">Adicione a pergunta aqui (clique aqui)</p>
+            <input type="text" name="pergunta" id="elemento-pergunta-input" class="fs-4 d-none border-1 border-dark rounded-4 p-2 w-100">
 
             <!-- Alternativas 1 e 2 -->
-            <div class="d-flex justify-content-between mt-5 w-100">
-                <div class="col-5 text-start clicavel">
-                    <p class="fs-5 elemento-alternativas">Adicione Alternativa 1</p>
-                    <img class="d-none h-25" src="Public/Icones/nocheck.png" style="width: auto; height: inherit">
-                    <label class="d-none fs-5 clicavel">Normal</label>
+            <div class="d-block d-lg-flex justify-content-between mt-2 mt-lg-4 w-100">
+                <div class="col-12 col-lg-5 text-start clicavel">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-1" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-break">Adicione Alternativa 1</p>
+                    </div>
                 </div>
-                <div class="col-5 text-start clicavel">
-                    <p class="fs-5 elemento-alternativas">Adicione Alternativa 2</p>
-                    <img class="d-none h-25" src="Public/Icones/nocheck.png" style="width: auto; height: inherit">
-                    <label class="d-none fs-5 clicavel">Explicação</label>
+                <div class="col-12 col-lg-5 text-start clicavel mt-2 mt-lg-0">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-2" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-break">Adicione Alternativa 2</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Alternativas 3 e 4 -->
-            <div class="d-flex justify-content-between mt-5 w-100">
-                <div class="col-5 text-start clicavel">
-                    <p class="fs-5 elemento-alternativas">Adicione Alternativa 3</p>
-                    <img class="d-none h-25" src="Public/Icones/nocheck.png" style="width: auto; height: inherit">
-                    <label class="d-none fs-5 clicavel">Normal</label>
+            <div class="d-block d-lg-flex justify-content-between mt-2 mt-lg-4 w-100">
+                <div class="col-12 col-lg-5 text-start clicavel">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-3" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-break">Adicione Alternativa 3</p>
+                    </div>
                 </div>
-                <div class="col-5 text-start clicavel">
-                    <p class="fs-5 elemento-alternativas">Adicione Alternativa 4</p>
-                    <img class="d-none h-25" src="Public/Icones/nocheck.png" style="width: auto; height: inherit">
-                    <label class="d-none fs-5 clicavel">Explicação</label>
+                <div class="col-12 col-lg-5 text-start clicavel mt-2 mt-lg-0">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-4" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-break">Adicione Alternativa 4</p>
+                    </div>
                 </div>
             </div>
 
+
+            <!-- Alternativas 5 e 6 -->
+            <div class="d-block d-lg-flex justify-content-between mt-2 mt-lg-4 w-100">
+                <div class="col-12 col-lg-5 text-start clicavel">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-5" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-break">Adicione Alternativa 5</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 text-start clicavel mt-2 mt-lg-0">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-6" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-break">Adicione Alternativa 6</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Alternativas 7 e 8 -->
+            <div class="d-block d-lg-flex justify-content-between mt-2 mt-lg-4 w-100">
+                <div class="col-12 col-lg-5 text-start clicavel">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-7" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-break">Adicione Alternativa 7</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 text-start clicavel mt-2 mt-lg-0">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-8" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-break">Adicione Alternativa 8</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Alternativas 9 e 10 -->
+            <div class="d-block d-lg-flex justify-content-between mt-2 mt-lg-4 w-100">
+                <div class="col-12 col-lg-5 text-start clicavel">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-9" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-wrap">Adicione Alternativa 9</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 text-start clicavel mt-2 mt-lg-0">
+                    <div class="h-75 d-flex align-items-center elemento-alternativas-completo">
+                        <img class="d-none mx-2 elemento-alternativas-check" width="30px" height="auto" src="Public/Icones/nocheck.png">
+                        <input type="text" name="alternativa-10" class="d-none border-1 border-dark rounded-4 mx-2 p-3 h-50 w-75 elemento-alternativas-input">
+                        <p class="d-block m-0 fs-5 elemento-alternativas-texto p-3 w-100 text-break">Adicione Alternativa 10</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-block d-lg-flex my-5 justify-content-center">
+                <input type="submit" name="outra" class="col-6 py-3 my-3 mx-auto mx-lg-3 rounded-4 border-0 d-flex justify-content-center text-white" style="background-color: #353531" value="Adicionar Outra Pergunta">
+                <input type="submit" name="finalizar" class="col-6 py-3 my-3 mx-auto mx-lg-3 rounded-4 border-0 d-flex justify-content-center text-white" style="background-color: #353531" value="Finalizar">
+            </div>
         </div>
-    </div>
+    </form>
 	</body>
 </html>
