@@ -14,16 +14,15 @@ else{
 }
 
 $diretorio_atual = parse_url($_SERVER['REQUEST_URI'])["path"];
-$diretorio_atual = explode("/", $diretorio_atual);
 
-if($diretorio_atual[1] == ""){
+if($diretorio_atual == "/"){
 	require_once("App/home.php");
 }
-else if($diretorio_atual[1] == "quiz"){
+else if($diretorio_atual == "/quiz"){
 	require_once("Public/quiz.html");
 }
-else if($diretorio_atual[1] == "cadastrar-atividade"){
-	require_once("Public/adicionar quiz.html");
+else if($diretorio_atual == "/cadastrar-atividade"){
+	require_once("App/adicionar quiz.php");
 }
 else{
 	require_once("Public/adicionar quiz.html");
