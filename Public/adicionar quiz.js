@@ -5,6 +5,7 @@ let elemento_pergunta_input = document.getElementById("elemento-pergunta-input")
 let elementos_alternativa_texto = document.getElementsByClassName("elemento-alternativas-texto");
 let elementos_alternativa_input = document.getElementsByClassName("elemento-alternativas-input");
 let elementos_alternativa_check = document.getElementsByClassName("elemento-alternativas-check");
+let elementos_alternativa_corretas = document.getElementById("elemento-alternativas-corretas");
 
 // Adicionando eventos
 
@@ -71,9 +72,11 @@ for(let contador = 0; contador < elementos_alternativa_check.length; contador++)
 	elementos_alternativa_check[contador].addEventListener("click", function(){
 		if(elementos_alternativa_check[contador].src.indexOf("nocheck") != -1){
 			elementos_alternativa_check[contador].src = elementos_alternativa_check[contador].src.replace("nocheck", "check");
+			elementos_alternativa_corretas.value = elementos_alternativa_corretas.value + contador;
 		}	
 		else{
 			elementos_alternativa_check[contador].src = elementos_alternativa_check[contador].src.replace("check", "nocheck");
+			elementos_alternativa_corretas.value = elementos_alternativa_corretas.value.replace(contador, "");
 		}
 	});
 }

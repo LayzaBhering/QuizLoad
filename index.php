@@ -25,7 +25,7 @@ else if($diretorio_atual == "/cadastrar-atividade"){
 	require_once("App/adicionar quiz.php");
 }
 else{
-	require_once("Public/adicionar quiz.html");
+	die("nada");
 }
 
 ?>

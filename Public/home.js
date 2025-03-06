@@ -8,14 +8,14 @@ let input_pop_up_adicionar_atividade = document.getElementById("input-adicionar-
 
 let pop_up = false;
 let elemento_caixa_popup = document.getElementById("caixa-popup");
-let botao_fechar_caixa_popup = document.getElementById("botao-fechar-caixa-popup-atividade");
+let botao_fechar_caixa_popup = document.getElementById("botao-fechar-popup-atividade");
 
 // Funções
 let elemento_campo_pergunta_selecionado = false;
 let funcao_selecionar_campo_pergunta = function(elemento_atual){
 	
 	// Verificando se tem pergunta
-	if(campo_pergunta = "\n            \n            \n                "){
+	if(campo_pergunta == "\n            \n            \n                "){
 		console.error("Sem perguntas");
 		return;
 	}

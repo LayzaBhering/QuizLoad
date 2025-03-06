@@ -16,7 +16,7 @@
         <div class='container my-5 p-4 border border-5 border-dark rounded-4' id="caixa-popup" style="position: absolute; background-color: #BBBAC6; top:0; left: 50%; transform: translateX(-50%); z-index:1000; display: none">
             <div class="d-flex justify-content-center">
                 <div class="col-1">
-                    <img class='col-1 pe-2 clicavel' id='botao-fechar-caixa-popup-atividade' src='Public/Icones/fechar.svg' style="min-width: 40px; max-width: 70px">
+                    <img class='col-1 pe-2 clicavel' id='botao-fechar-popup-atividade' src='Public/Icones/fechar.svg' style="min-width: 40px; max-width: 70px">
                 </div>        
                 <h5 class="col-11 ps-4 mb-4" id="elemento-titulo-popup">Adicione o Nome da Atividade</h5>
             </div>
@@ -68,7 +68,7 @@ else{
     for($contador = 0; $contador < count($database->atividades); $contador++){
         $temporaria_texto = $database->atividades[$contador]["Texto_Atividade"];
         $temporaria_quantidade = $database->atividades[$contador]["Quantidade_Perguntas"];
-        $temporaria_ultima_tentativa = date("d/m/Y", strtotime($database->atividades[$contador]["Ultima_Tentativa"]));
+        $temporaria_ultima_tentativa = $database->atividades[$contador]["Ultima_Tentativa"] ?? "-";
         $html_atividades.=<<<ATIVIDADE
             <div class='p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel' data-id='1' style='background-color: #E2E2E2'>
                 <!-- Título da pergunta -->
