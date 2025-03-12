@@ -15,8 +15,14 @@ let elemento_campo_pergunta_selecionado = false;
 let funcao_selecionar_campo_pergunta = function(elemento_atual){
 	
 	// Verificando se tem pergunta
-	if(campo_pergunta == "\n            \n            \n                "){
+	if(campo_pergunta[0].textContent.indexOf("Você ainda não tem perguntas, adicione!") != -1){
 		console.error("Sem perguntas");
+		return;
+	}
+
+	// Verificando te sem popup aberto
+	if(pop_up == true){
+		console.error("Pop Up aberto");
 		return;
 	}
 
@@ -44,6 +50,21 @@ let funcao_mostrar_ocultar_popup_adicionar_atividade = function(){
 	}
 }
 
+let funcao_mudar_rota = function(rota, valor){
+	let form = document.createElement('form');
+	form.method = 'POST';
+	form.action = '/'+rota;
+	
+	let parametro = document.createElement('input'); 
+	parametro.type = 'hidden';
+	parametro.name = 'parametro';
+	parametro.value = valor;
+
+	form.appendChild(parametro);
+	document.body.appendChild(form);
+	form.submit();
+}
+
 // Adicionando evento aos elementos
 
 // Adicionando evento nos ícones
@@ -54,16 +75,29 @@ icones[0].addEventListener("click", ()=>{
 		return;
 	}
 	// Verificando se tem pergunta selecionada
-	else if(elemento_campo_pergunta_selecionado != false){
-		elemento_campo_pergunta_selecionado.classList.remove("border");
-		opcoes_elemento_selecionado.classList.add("opacity-25");
-		elemento_campo_pergunta_selecionado = false;
+	else if(elemento_campo_pergunta_selecionado == false){
+		console.error("Seleciona alguma pergunta");
+		return;
 	}
+	elemento_campo_pergunta_selecionado.classList.remove("border");
+	opcoes_elemento_selecionado.classList.add("opacity-25");
+	elemento_campo_pergunta_selecionado = false;
 });
 
 // Ícones no menu
 icones[1].addEventListener("click", ()=>{
-	// Irei implementar
+	// Verificando se o popup está aberto
+	if(pop_up == true){
+		console.error("Pop Up aberto");
+		return;
+	}
+	// Verificando se tem pergunta selecionada
+	else if(elemento_campo_pergunta_selecionado == false){
+		console.error("Seleciona alguma pergunta");
+		return;
+	}
+
+	funcao_mudar_rota('quiz', elemento_campo_pergunta_selecionado.childNodes[3].childNodes[1].textContent);
 });
 
 icones[2].addEventListener("click", ()=>{

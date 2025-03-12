@@ -23,7 +23,7 @@
             <form id="formulario-popup-adicionar-atividade" action="cadastrar-atividade" method="POST">
                 <div class="d-flex justify-content-between mt-4">
                     <small class="col-2 p-3 fs-5">Nome:</small>
-                    <input class="col-9 col-lg-10 p-3 fs-5 border 1 border-dark rounded-4" id="input-adicionar-atividade" type="text" name="titulo-atividade" style="background-color: E2E2E2">
+                    <input class="col-9 col-lg-10 p-3 fs-5 border 1 border-dark rounded-4" maxlength="50" id="input-adicionar-atividade" type="text" name="titulo-atividade" style="background-color: E2E2E2">
                 </div>
                 <input type="submit" class="col-8 d-block mx-auto p-3 mt-5 rounded-5 d-flex justify-content-center fs-5 text-white clicavel" id="botao-adicionar-atividade" value="Enviar" style="border: none; background-color: #353531">
             </form>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <title>TESTE</title>
+        <title>Iniciar Questão</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, inicial-scale=1">
         <link rel="stylesheet" href="Public/quiz.css">
@@ -14,7 +14,7 @@
         <!-- Campo do Quiz -->
         <div class="container py-2 mt-5 rounded-4" style="background-color: #BBBAC6">
             <div class="d-flex mt-3 justify-content-center">
-                <p class="fs-1">Questões PHP</p>
+                <p class="fs-1"><? echo($_POST['parametro']) ?></p>
             </div>
             <div class="d-sm-block d-lg-flex justify-content-center mt-4" style="widht: 100%">
                 <div class="col-0 col-lg-4 mx-auto mx-lg-0 text-center text-lg-start">

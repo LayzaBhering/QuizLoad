@@ -19,7 +19,7 @@ if($diretorio_atual == "/"){
 	require_once("App/home.php");
 }
 else if($diretorio_atual == "/quiz"){
-	require_once("Public/quiz.html");
+	require_once("App/quiz.php");
 }
 else if($diretorio_atual == "/cadastrar-atividade"){
 	require_once("App/adicionar quiz.php");

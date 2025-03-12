@@ -38,11 +38,11 @@ class DataBase{
 	}
 		
 	public function criar_estrutura_banco_de_dados(){
-		$sql = "CREATE TABLE Atividades (ID_Atividade INTEGER PRIMARY KEY AUTO_INCREMENT, Texto_Atividade VARCHAR (50), Quantidade_Perguntas INTEGER, Ultima_Tentativa VARCHAR (10));";
+		$sql = "CREATE TABLE Atividades (ID_Atividade INTEGER PRIMARY KEY AUTO_INCREMENT, Texto_Atividade VARCHAR (100), Quantidade_Perguntas INTEGER, Ultima_Tentativa VARCHAR (10));";
 		$this->conexao_banco_de_dados->query($sql);
-		$sql = "CREATE TABLE Perguntas (ID_Pergunta INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Atividade_Correspondente INTEGER, Texto_Pergunta VARCHAR (50));";
+		$sql = "CREATE TABLE Perguntas (ID_Pergunta INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Atividade_Correspondente INTEGER, Texto_Pergunta VARCHAR (250), Explicacao_Pergunta VARCHAR(400));";
 		$this->conexao_banco_de_dados->query($sql);
-		$sql = "CREATE TABLE Alternativas (ID_Alternativa INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Pergunta_Correspondente INTEGER, Texto_Alternativa VARCHAR (50), Correta BOOL);";
+		$sql = "CREATE TABLE Alternativas (ID_Alternativa INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Pergunta_Correspondente INTEGER, Texto_Alternativa VARCHAR (200), Correta BOOL);";
 		$this->conexao_banco_de_dados->query($sql);
 		$sql = "CREATE TABLE Configuracoes (Tempo_Default INTEGER, Aleatoriedade_Perguntas_Default BOOL, Aleatoriedade_Alternativas_Default BOOL);";
 		$this->conexao_banco_de_dados->query($sql);
@@ -80,7 +80,26 @@ class DataBase{
 
 	}
 
-	public function adicionar_nova_pergunta($titulo_atividade, $pergunta, $alternativas, $corretas){
+	public function verifica_se_pergunta_ja_existe($titulo_atividade){
+		$consulta_tratada = $this->conexao_banco_de_dados->prepare("SELECT ID_Atividade FROM Atividades WHERE Texto_Atividade=?");
+
+		if($consulta_tratada === false){
+			die("Erro ao criar a conexão para verificar atividade");
+		}
+
+		$consulta_tratada->bind_param("s", $titulo_atividade);
+		$consulta_tratada->execute();
+		$consulta_tratada->store_result();
+
+		if($consulta_tratada->num_rows == 0){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
+	public function adicionar_nova_pergunta($titulo_atividade, $pergunta, $alternativas, $corretas, $explicacao){
 		// Consultando o ID da Atividade
 		$consulta_tratada = $this->conexao_banco_de_dados->prepare("SELECT ID_Atividade, Quantidade_Perguntas FROM Atividades WHERE Texto_Atividade=?");
 
@@ -101,13 +120,13 @@ class DataBase{
 		$consulta_tratada->close();
 
 		// Adicionando Pergunta da Atividade
-		$insercao_tratada = $this->conexao_banco_de_dados->prepare("INSERT INTO Perguntas (ID_Atividade_Correspondente, Texto_Pergunta) VALUES (?, ?)");
+		$insercao_tratada = $this->conexao_banco_de_dados->prepare("INSERT INTO Perguntas (ID_Atividade_Correspondente, Texto_Pergunta, Explicacao_Pergunta) VALUES (?, ?, ?)");
 		
 		if($insercao_tratada === false){
 			die("Erro ao criar a conexão para enviar a pergunta");
 		}
 
-		$insercao_tratada->bind_param("is", $id_atividade, $pergunta);
+		$insercao_tratada->bind_param("iss", $id_atividade, $pergunta, $explicacao);
 		$resultado = $insercao_tratada->execute();
 
 		if($resultado == false){
