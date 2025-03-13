@@ -1,69 +1,97 @@
 <?php
 
-// Verifica se quem chamou o .php foi a página index
-if(!isset($permissao_pagina_index)){
+if(basename($_SERVER['PHP_SELF']) === 'adicionarQuiz.php'){
 	exit;
 }
 
-// Verificando se é uma nova atividade ou adição a uma existente
-if(isset($_POST["pergunta"])){
-    $numero_questao = $_POST["numeracao-questao"]+1;
+class AdicionarAtividade{
+    //private $parametrosEnviaViaPOST = ['titulo-atividade', 'numeracao-questao', 'pergunta', 'alternativa', 'alternativas-correta', 'explicacao'];
+    private $instanciaBancoDeDados;
+    public $tituloAtividade;
+    public $numeroQuestao;
+    private $pergunta;
+    private $alternativas;
+    private $alternativasCorretas;
+    private $explicacao;
+    
+    public function __construct($instanciaBancoDeDados){
 
-    $titulo_atividade = htmlspecialchars(substr($_POST["titulo-atividade"], 0, 100));
+        $this->instanciaBancoDeDados = $instanciaBancoDeDados;
 
-    $pergunta = htmlspecialchars(substr($_POST["pergunta"], 0, 250));
-
-    $alternativas = [
-        $_POST["alternativa-1"],
-        $_POST["alternativa-2"],
-        $_POST["alternativa-3"],
-        $_POST["alternativa-4"],
-        $_POST["alternativa-5"],
-        $_POST["alternativa-6"],
-        $_POST["alternativa-7"],
-        $_POST["alternativa-8"],
-        $_POST["alternativa-9"],
-        $_POST["alternativa-10"]
-    ];
-
-    $alternativas = array_filter($alternativas, function($alternativa_atual){
-        if($alternativa_atual != ""){
-            return htmlspecialchars(substr($alternativa_atual, 0,200));
+        if(isset($_POST['pergunta'])){
+            $this->adicionarPergunta();
         }
-    });
-
-    $corretas = str_split(substr($_POST["alternativas-correta"], 0, 10));
-
-    $corretas = array_map(function($correta){
-        return htmlspecialchars($correta);
-    }, $corretas);
-
-    $explicacao = htmlspecialchars(substr($_POST["explicacao"], 0, 400));
-
-    $database->adicionar_nova_pergunta($titulo_atividade, $pergunta, $alternativas, $corretas, $explicacao);
-
-    // Verificando se é adição de uma nova pergunta ou finalizado a atual
-    if(isset($_POST["opcao"]) && $_POST["opcao"] == "finalizar"){
-        header("Location: /");
-        exit();
-    }
-}
-else if(isset($_POST["titulo-atividade"])){
-    // Verificando se pergunta já existe
-    if($database -> verifica_se_pergunta_ja_existe(htmlspecialchars(substr($_POST["titulo-atividade"], 0, 100)))){
-        echo '<script>alert("Essa pergunta já existe")</script>';
-        echo '<script>window.location.href = window.location.href.replace("cadastrar-atividade", "")</script>';
-        exit;
+        else if(isset($_POST['titulo-atividade'])){
+            $this->criarAtividade();
+        }
+        else{
+            die('Crie uma atividade antes de vir para está página');
+        }
     }
 
-    // Vai executar caso não exista
-    $numero_questao = 1;
-    $retorno_db = $database -> adicionar_nova_atividade(htmlspecialchars(substr($_POST["titulo-atividade"], 0, 100)));
-}
-else{
-    die("Crie uma atividade");
+    private function adicionarPergunta(){
+        $this->numeroQuestao = $_POST["numeracao-questao"]+1;
+
+        $this->tituloAtividade = htmlspecialchars(substr($_POST["titulo-atividade"], 0, 100));
+
+        $this->pergunta = htmlspecialchars(substr($_POST["pergunta"], 0, 250));
+
+        $this->alternativas = [
+            $_POST["alternativa-1"],
+            $_POST["alternativa-2"],
+            $_POST["alternativa-3"],
+            $_POST["alternativa-4"],
+            $_POST["alternativa-5"],
+            $_POST["alternativa-6"],
+            $_POST["alternativa-7"],
+            $_POST["alternativa-8"],
+            $_POST["alternativa-9"],
+            $_POST["alternativa-10"]
+        ];
+
+        $this->alternativas = array_filter($this->alternativas, function($alternativa_atual){
+            if($alternativa_atual != ""){
+                return htmlspecialchars(substr($alternativa_atual, 0,200));
+            }
+        });
+
+        $this->alternativasCorretas = str_split(substr($_POST["alternativas-correta"], 0, 10));
+
+        $this->alternativasCorretas = array_map(function($correta){
+            return htmlspecialchars($correta);
+        }, $this->alternativasCorretas);
+
+        $this->explicacao = htmlspecialchars(substr($_POST["explicacao"], 0, 400));
+
+        $this->instanciaBancoDeDados->adicionarNovaPergunta($this->tituloAtividade, $this->pergunta, $this->alternativas, $this->alternativasCorretas, $this->explicacao);
+
+        // Verificando se é adição de uma nova pergunta ou finalizado a atual
+        if(isset($_POST["opcao"]) && $_POST["opcao"] == "finalizar"){
+            header("Location: /");
+            exit;
+        }
+    }
+
+    private function criarAtividade(){
+        $this->tituloAtividade = $_POST['titulo-atividade'];
+        $this->tituloAtividade = htmlspecialchars(substr($this->tituloAtividade, 0, 100));
+
+        if($this->verificarSeNovaPerguntaEnviadaExiste() == true){
+            echo '<script>alert("Essa pergunta já existe")</script>';
+            echo '<script>window.location.href = window.location.href.replace("cadastrar-atividade", "")</script>';
+            exit;
+        }
+
+        $this->numeroQuestao = 1;
+        $this->instanciaBancoDeDados->adicionarNovaAtividade($this->tituloAtividade);
+    }
+
+    function verificarSeNovaPerguntaEnviadaExiste(){
+        return $this->instanciaBancoDeDados->verificaSePerguntaJaExiste($this->tituloAtividade);
+    }
 }
 
+$instanciaAdicionarAtividade = new AdicionarAtividade($this->instanciaBancoDeDados);
 ?>
 
 <!DOCTYPE html>
@@ -81,11 +109,11 @@ else{
  		<!-- Campo do Quiz -->
     <form method="POST" class="container d-block py-2 my-5 rounded-4" id="formulario" style="background-color: #BBBAC6">
         <div class="d-flex px-1 mt-3 justify-content-center">
-            <input type="text" name="titulo-atividade" class="d-none" value="<?php echo htmlspecialchars($_POST["titulo-atividade"]); ?>">
-            <p class="fs-1 px-xxl-5 text-center">Adicione as perguntas e alternatias do: <?php echo htmlspecialchars($_POST["titulo-atividade"]); ?></p>
+            <input type="text" name="titulo-atividade" class="d-none" value="<?php echo $instanciaAdicionarAtividade->tituloAtividade; ?>">
+            <p class="fs-1 px-xxl-5 text-center">Adicione as perguntas e alternatias do: <?php echo $instanciaAdicionarAtividade->tituloAtividade; ?></p>
         </div>
-        <p class="fs-1 px-xxl-5 text-center">(Questão <?php echo $numero_questao; ?>)</p>
-        <input type="text" name="numeracao-questao" class="d-none" value="<?php echo $numero_questao; ?>">
+        <p class="fs-1 px-xxl-5 text-center">(Questão <?php echo $instanciaAdicionarAtividade->numeroQuestao ?>)</p>
+        <input type="text" name="numeracao-questao" class="d-none" value="<?php echo $instanciaAdicionarAtividade->numeroQuestao; ?>">
         <p class="fs-5 px-1 text-center">Marque o checkbox para colocar a alternativa como correta (para remover a alternativa, basta deixar vazio)</p>
         <div class="col-12 col-sm-10 mx-auto p-4 my-4 rounded" id="elemento-pergunta" style="background-color: #E2E2E2">
             <p class="fs-4 p-2 text-break clicavel" id="elemento-pergunta-texto">Adicione a pergunta aqui (clique aqui)</p>

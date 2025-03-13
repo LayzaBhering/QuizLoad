@@ -1,3 +1,11 @@
+<?php
+
+if(basename($_SERVER['PHP_SELF']) === 'home.php'){
+	exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang='pt-br'>
     <head>
@@ -47,14 +55,13 @@
         </div>
 
         <!-- Campo de perguntas -->
-        <div class='container d-flex flex-column py-2 mt-5 rounded-4' style='background-color: #BBBAC6'>
+        <div class='container d-flex flex-column py-2 my-5 rounded-4' style='background-color: #BBBAC6'>
             <!-- Campo da pergunta -->
 <?php
-$teste = "teste";
-$html_atividades="";
+$htmlAtividades="";
 
-if(count($database->atividades) == 0){
-    $html_atividades.=<<<ATIVIDADE
+if(count($this->instanciaBancoDeDados->atividades) == 0){
+    $htmlAtividades.=<<<ATIVIDADE
             <div class='p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel' data-id='1' style='background-color: #E2E2E2'>
                 <!-- Título da pergunta -->
                 <div class='col-8 align-self-center px-2 pe-3'>
@@ -65,26 +72,26 @@ if(count($database->atividades) == 0){
 }
 
 else{
-    for($contador = 0; $contador < count($database->atividades); $contador++){
-        $temporaria_texto = $database->atividades[$contador]["Texto_Atividade"];
-        $temporaria_quantidade = $database->atividades[$contador]["Quantidade_Perguntas"];
-        $temporaria_ultima_tentativa = $database->atividades[$contador]["Ultima_Tentativa"] ?? "-";
-        $html_atividades.=<<<ATIVIDADE
+    for($contador = 0; $contador < count($this->instanciaBancoDeDados->atividades); $contador++){
+        $temporariaTexto = $this->instanciaBancoDeDados->atividades[$contador]["Texto_Atividade"];
+        $temporariaQuantidade = $this->instanciaBancoDeDados->atividades[$contador]["Quantidade_Perguntas"];
+        $temporariaUltimaTentativa = $this->instanciaBancoDeDados->atividades[$contador]["Ultima_Tentativa"] ?? "-";
+        $htmlAtividades.=<<<ATIVIDADE
             <div class='p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel' data-id='1' style='background-color: #E2E2E2'>
                 <!-- Título da pergunta -->
                 <div class='col-7 align-self-center px-2 pe-3'>
-                    <small class='fs-6'>$temporaria_texto</small>
+                    <small class='fs-6'>$temporariaTexto</small>
                 </div>
                 <!-- Informações sobre a pergunta -->
                 <div class='col-5 px-2 align-self-center'>
-                    <small class='d-block'>Quantidade: $temporaria_quantidade</small>
-                    <small>Última Tentativa: $temporaria_ultima_tentativa</small>
+                    <small class='d-block'>Quantidade: $temporariaQuantidade</small>
+                    <small>Última Tentativa: $temporariaUltimaTentativa</small>
                 </div>
             </div>
         ATIVIDADE;
     }
 }
-echo $html_atividades;
+echo $htmlAtividades;
 
 ?>
         </div>

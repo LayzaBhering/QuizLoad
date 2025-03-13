@@ -1,30 +1,29 @@
 <?php
 
-if(!isset($permissao_pagina_index)){
+if(basename($_SERVER['PHP_SELF']) === 'database.php'){
 	exit;
 }
 
 class DataBase{
-	private $conexao_banco_de_dados;
-	private $estado_banco_de_dados;
-
-	public $atividades=[];
+	private $conexaoBancoDeDados;
+	public $atividades = [];
 
 	public function __construct(){
-		$this->conexao_banco_de_dados = new mysqli("mysql", "root", "password", "QuizLoad");
-		if($this->conexao_banco_de_dados->connect_error){
+		$senhaBancoDeDados = getenv('DB_PASSWORD');
+		$nomeBancoDeDados = getenv('DB_NAME');
+		$this->conexaoBancoDeDados = new mysqli('mysql', 'root', $senhaBancoDeDados, $nomeBancoDeDados);
+		if($this->conexaoBancoDeDados->connect_error){
 			echo "Erro ao  conectar ao banco de dados";
 			exit;
 		}
 	}
 
-	public function verificar_estado_banco_de_dados(){
+	public function verificarSeBancoDeDadosJaFoiCriado(){
 		$sql = "SELECT * FROM Atividades";
-		$retorno = $this->conexao_banco_de_dados->query($sql);
+		$retorno = $this->conexaoBancoDeDados->query($sql);
 
 		if($retorno == false){
-			if($this->conexao_banco_de_dados->error == "Table 'QuizLoad.Atividades' doesn't exist"){
-				$this->estado_banco_de_dados = false;
+			if($this->conexaoBancoDeDados->error == "Table 'QuizLoad.Atividades' doesn't exist"){
 				return false;
 			}
 			else{
@@ -32,29 +31,26 @@ class DataBase{
 			}
 		}
 		else{
-			$this->estado_banco_de_dados = true;
 			return true;
 		}
 	}
 		
-	public function criar_estrutura_banco_de_dados(){
+	public function criarEstruturaBancoDeDados(){
 		$sql = "CREATE TABLE Atividades (ID_Atividade INTEGER PRIMARY KEY AUTO_INCREMENT, Texto_Atividade VARCHAR (100), Quantidade_Perguntas INTEGER, Ultima_Tentativa VARCHAR (10));";
-		$this->conexao_banco_de_dados->query($sql);
+		$this->conexaoBancoDeDados->query($sql);
 		$sql = "CREATE TABLE Perguntas (ID_Pergunta INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Atividade_Correspondente INTEGER, Texto_Pergunta VARCHAR (250), Explicacao_Pergunta VARCHAR(400));";
-		$this->conexao_banco_de_dados->query($sql);
+		$this->conexaoBancoDeDados->query($sql);
 		$sql = "CREATE TABLE Alternativas (ID_Alternativa INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Pergunta_Correspondente INTEGER, Texto_Alternativa VARCHAR (200), Correta BOOL);";
-		$this->conexao_banco_de_dados->query($sql);
+		$this->conexaoBancoDeDados->query($sql);
 		$sql = "CREATE TABLE Configuracoes (Tempo_Default INTEGER, Aleatoriedade_Perguntas_Default BOOL, Aleatoriedade_Alternativas_Default BOOL);";
-		$this->conexao_banco_de_dados->query($sql);
+		$this->conexaoBancoDeDados->query($sql);
 	}
 
-	public function listar_todas_atividades(){
+	public function listarTodasAtividades(){
 		$sql = "SELECT * FROM Atividades";
-		$retorno = $this->conexao_banco_de_dados->query($sql);
+		$retorno = $this->conexaoBancoDeDados->query($sql);
 
-		if($retorno->num_rows == 0){
-		}
-		else{
+		if($retorno->num_rows > 0){
 			$contador=0;
 			while($row = $retorno->fetch_assoc()){
 				$this->atividades[$contador] = $row;
@@ -63,35 +59,32 @@ class DataBase{
 		}
 	}
 
-	public function adicionar_nova_atividade($nome_atividade){
-		$consulta_tratada = $this->conexao_banco_de_dados->prepare("INSERT INTO Atividades (Texto_Atividade, Quantidade_Perguntas, Ultima_Tentativa) VALUES (?, 0, '')");
+	public function adicionarNovaAtividade($nomeAtividade){
+		$consultaTratada = $this->conexaoBancoDeDados->prepare("INSERT INTO Atividades (Texto_Atividade, Quantidade_Perguntas, Ultima_Tentativa) VALUES (?, 0, '')");
 
 		// Verificando se ocorreu erro
-		if($consulta_tratada == false){
+		if($consultaTratada == false){
 			die("Erro ao criar a consulta tratada");
 		}
 
-		$consulta_tratada->bind_param("s", $nome_atividade);
-		$resultado = $consulta_tratada->execute();
+		$consultaTratada->bind_param("s", $nomeAtividade);
+		$resultado = $consultaTratada->execute();
 
-		$consulta_tratada->close();
-
-		return $nome_atividade;
-
+		$consultaTratada->close();
 	}
 
-	public function verifica_se_pergunta_ja_existe($titulo_atividade){
-		$consulta_tratada = $this->conexao_banco_de_dados->prepare("SELECT ID_Atividade FROM Atividades WHERE Texto_Atividade=?");
+	public function verificaSePerguntaJaExiste($tituloAtividade){
+		$consultaTratada = $this->conexaoBancoDeDados->prepare("SELECT ID_Atividade FROM Atividades WHERE Texto_Atividade=?");
 
-		if($consulta_tratada === false){
-			die("Erro ao criar a conexão para verificar atividade");
+		if($consultaTratada === false){
+			die("Erro ao criar a conexão para verificar se atividade já exite");
 		}
 
-		$consulta_tratada->bind_param("s", $titulo_atividade);
-		$consulta_tratada->execute();
-		$consulta_tratada->store_result();
+		$consultaTratada->bind_param("s", $tituloAtividade);
+		$consultaTratada->execute();
+		$consultaTratada->store_result();
 
-		if($consulta_tratada->num_rows == 0){
+		if($consultaTratada->num_rows == 0){
 			return false;
 		}
 		else{
@@ -99,65 +92,65 @@ class DataBase{
 		}
 	}
 
-	public function adicionar_nova_pergunta($titulo_atividade, $pergunta, $alternativas, $corretas, $explicacao){
+	public function adicionarNovaPergunta($tituloAtividade, $pergunta, $alternativas, $alternativasCorretas, $explicacao){
 		// Consultando o ID da Atividade
-		$consulta_tratada = $this->conexao_banco_de_dados->prepare("SELECT ID_Atividade, Quantidade_Perguntas FROM Atividades WHERE Texto_Atividade=?");
+		$consultaTratada = $this->conexaoBancoDeDados->prepare("SELECT ID_Atividade, Quantidade_Perguntas FROM Atividades WHERE Texto_Atividade=?");
 
-		if($consulta_tratada === false){
+		if($consultaTratada === false){
 			die("Erro ao criar a conexão para enviar a atividade");
 		}
 
-		$consulta_tratada->bind_param("s", $titulo_atividade);
-		$consulta_tratada->execute();
-		$consulta_tratada->store_result();
+		$consultaTratada->bind_param("s", $tituloAtividade);
+		$consultaTratada->execute();
+		$consultaTratada->store_result();
 
-		if($consulta_tratada->num_rows == 0){
+		if($consultaTratada->num_rows == 0){
 			die("Não foi possível encontrar a atividade");
 		}
 
-		$consulta_tratada->bind_result($id_atividade, $quantidade_perguntas);
-		$consulta_tratada->fetch();
-		$consulta_tratada->close();
+		$consultaTratada->bind_result($idAtividade, $quantidadePerguntas);
+		$consultaTratada->fetch();
+		$consultaTratada->close();
 
 		// Adicionando Pergunta da Atividade
-		$insercao_tratada = $this->conexao_banco_de_dados->prepare("INSERT INTO Perguntas (ID_Atividade_Correspondente, Texto_Pergunta, Explicacao_Pergunta) VALUES (?, ?, ?)");
+		$insercaoTratada = $this->conexaoBancoDeDados->prepare("INSERT INTO Perguntas (ID_Atividade_Correspondente, Texto_Pergunta, Explicacao_Pergunta) VALUES (?, ?, ?)");
 		
-		if($insercao_tratada === false){
+		if($insercaoTratada === false){
 			die("Erro ao criar a conexão para enviar a pergunta");
 		}
 
-		$insercao_tratada->bind_param("iss", $id_atividade, $pergunta, $explicacao);
-		$resultado = $insercao_tratada->execute();
+		$insercaoTratada->bind_param("iss", $idAtividade, $pergunta, $explicacao);
+		$resultado = $insercaoTratada->execute();
 
 		if($resultado == false){
 			die("Erro ao Cadastrar Pergunta");
 		}
 
-		$id_pergunta = $insercao_tratada->insert_id;
+		$idPergunta = $insercaoTratada->insert_id;
 
-		$insercao_tratada->close();
+		$insercaoTratada->close();
 
 		// Adicionando Alternativas da Atividade
-		$contador_alternativa = 0;
+		$contadorAlternativa = 0;
 		for($contador = 0; $contador < count($alternativas); $contador++){
-			$insercao_tratada = $this->conexao_banco_de_dados->prepare("INSERT INTO Alternativas (ID_Pergunta_Correspondente, Texto_Alternativa, Correta) VALUES (?, ?, ?)");
+			$insercaoTratada = $this->conexaoBancoDeDados->prepare("INSERT INTO Alternativas (ID_Pergunta_Correspondente, Texto_Alternativa, Correta) VALUES (?, ?, ?)");
 		
-			if($insercao_tratada === false){
+			if($insercaoTratada === false){
 				die("Erro ao criar a conexão para enviar as alternativas $contador");
 			}
 
-			if($contador == $corretas[$contador_alternativa]){
-				$alternativa_atual_correta = 1;
-				if(isset($corretas[$contador_alternativa+1])){
-					$contador_alternativa++;
+			if($contador == $alternativasCorretas[$contadorAlternativa]){
+				$alternativaCorretaAtual = 1;
+				if(isset($alternativasCorretas[$contadorAlternativa+1])){
+					$contadorAlternativa++;
 				}
 			}
 			else{
-				$alternativa_atual_correta = 0;
+				$alternativaCorretaAtual = 0;
 			}
 
-			$insercao_tratada->bind_param("isi", $id_pergunta, $alternativas[$contador], $alternativa_atual_correta);
-			$resultado = $insercao_tratada->execute();
+			$insercaoTratada->bind_param("isi", $idPergunta, $alternativas[$contador], $alternativaCorretaAtual);
+			$resultado = $insercaoTratada->execute();
 
 			if($resultado == false){
 				die("Erro ao Cadastrar Pergunta");
@@ -165,9 +158,9 @@ class DataBase{
 		}
 
 		// Atualizando a quantidade de perguntas
-		$quantidade_perguntas++;
-		$sql = "UPDATE Atividades SET Quantidade_Perguntas=$quantidade_perguntas WHERE ID_Atividade=$id_atividade";
-		$retorno = $this->conexao_banco_de_dados->query($sql);
+		$quantidadePerguntas++;
+		$sql = "UPDATE Atividades SET Quantidade_Perguntas=$quantidadePerguntas WHERE ID_Atividade=$idAtividade";
+		$retorno = $this->conexaoBancoDeDados->query($sql);
 
 		if($retorno == false){
 			die("Erro ao atualizar a quantidade");
