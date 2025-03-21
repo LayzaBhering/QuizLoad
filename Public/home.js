@@ -1,4 +1,5 @@
 // Variáveis
+let container_pagina = document.getElementById('container-pagina');
 let icones = document.getElementsByClassName("icones");
 let campo_pergunta = document.getElementsByClassName("campo-pergunta");
 let opcoes_elemento_selecionado = document.getElementById("opcoes-pergunta-selecionada");
@@ -37,15 +38,22 @@ let funcao_selecionar_campo_pergunta = function(elemento_atual){
 		elemento_campo_pergunta_selecionado = elemento_atual;
 		opcoes_elemento_selecionado.classList.remove("opacity-25");
 	}
+	else{
+		elemento_campo_pergunta_selecionado.classList.remove("border");
+		opcoes_elemento_selecionado.classList.add("opacity-25");
+		elemento_campo_pergunta_selecionado = false;
+	}
 }
 
 let funcao_mostrar_ocultar_popup_adicionar_atividade = function(){
 	if(pop_up == false){
 		elemento_caixa_popup.style.display = "block";
+		container_pagina.style.filter = 'blur(2px)';
 		pop_up = true;
 	}
 	else{
 		elemento_caixa_popup.style.display = "none";
+		container_pagina.style.filter = '';
 		pop_up = false;
 	}
 }
@@ -79,25 +87,12 @@ icones[0].addEventListener("click", ()=>{
 		console.error("Seleciona alguma pergunta");
 		return;
 	}
-	elemento_campo_pergunta_selecionado.classList.remove("border");
-	opcoes_elemento_selecionado.classList.add("opacity-25");
-	elemento_campo_pergunta_selecionado = false;
+
+	funcao_mudar_rota('quiz', elemento_campo_pergunta_selecionado.childNodes[3].childNodes[1].textContent);
 });
 
 // Ícones no menu
 icones[1].addEventListener("click", ()=>{
-	// Verificando se o popup está aberto
-	if(pop_up == true){
-		console.error("Pop Up aberto");
-		return;
-	}
-	// Verificando se tem pergunta selecionada
-	else if(elemento_campo_pergunta_selecionado == false){
-		console.error("Seleciona alguma pergunta");
-		return;
-	}
-
-	funcao_mudar_rota('quiz', elemento_campo_pergunta_selecionado.childNodes[3].childNodes[1].textContent);
 });
 
 icones[2].addEventListener("click", ()=>{
@@ -105,16 +100,15 @@ icones[2].addEventListener("click", ()=>{
 });
 
 icones[3].addEventListener("click", ()=>{
-	// Irei implementar
-});
-
-icones[4].addEventListener("click", ()=>{
 	// Verificando te sem popup aberto
 	if(pop_up == true){
 		console.error("Pop Up aberto");
 		return;
 	}
 	funcao_mostrar_ocultar_popup_adicionar_atividade();
+});
+
+icones[4].addEventListener("click", ()=>{
 });
 
 icones[5].addEventListener("click", ()=>{

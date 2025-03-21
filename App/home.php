@@ -38,36 +38,37 @@ if(basename($_SERVER['PHP_SELF']) === 'home.php'){
         </div>
         
         <!-- Campo de menu -->
-        <div class='container d-flex mt-3 px-1'>
-            <div class='col-7 rounded-4 d-flex justify-content-around opacity-25' id='opcoes-pergunta-selecionada' style='background-color: #BBBAC6'>
-                <img class='p-3 icones clicavel' src='Public/Icones/fechar.svg'>
-                <img class='p-3 icones clicavel' src='Public/Icones/iniciar.svg'>
-                <img class='p-3 icones clicavel' src='Public/Icones/editar.svg'>
-                <img class='p-3 icones clicavel' src='Public/Icones/download.svg'>
+         <div id='container-pagina'>
+            <div class='container d-flex mt-3 px-1'>
+                <div class='col-7 rounded-4 d-flex justify-content-around opacity-25' id='opcoes-pergunta-selecionada' style='background-color: #BBBAC6'>
+                    <img class='p-3 icones clicavel' src='Public/Icones/iniciar.svg'>
+                    <img class='p-3 icones clicavel' src='Public/Icones/editar.svg'>
+                    <img class='p-3 icones clicavel' src='Public/Icones/download.svg'>
+                </div>
+                <div class='d-flex py-1 px-1 py-md-2 py-xxl-3 col-1 invisible'>
+                    <small>achou ksksksk</small>
+                </div>
+                <div class='col-4 ms-auto rounded-4 d-flex justify-content-around' style='background-color: #BBBAC6'>
+                    <img class='p-3 icones clicavel' src='Public/Icones/adicionar.svg'>
+                    <img class='p-3 icones clicavel' src='Public/Icones/upload.svg'>
+                    <img class='p-3 icones clicavel' src='Public/Icones/config.svg'>
+                </div>
             </div>
-            <div class='d-flex py-1 px-1 py-md-2 py-xxl-3 col-1 invisible'>
-                <small>achou ksksksk</small>
-            </div>
-            <div class='col-4 ms-auto rounded-4 d-flex justify-content-around' style='background-color: #BBBAC6'>
-                <img class='p-3 icones clicavel' src='Public/Icones/adicionar.svg'>
-                <img class='p-3 icones clicavel' src='Public/Icones/upload.svg'>
-            </div>
-        </div>
 
-        <!-- Campo de perguntas -->
-        <div class='container d-flex flex-column py-2 my-5 rounded-4' style='background-color: #BBBAC6'>
-            <!-- Campo da pergunta -->
+            <!-- Campo de perguntas -->
+            <div class='container d-flex flex-column py-2 my-5 rounded-4' style='background-color: #BBBAC6'>
+                <!-- Campo da pergunta -->
 <?php
 $htmlAtividades="";
 
 if(count($this->instanciaBancoDeDados->atividades) == 0){
     $htmlAtividades.=<<<ATIVIDADE
-            <div class='p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel' data-id='1' style='background-color: #E2E2E2'>
-                <!-- Título da pergunta -->
-                <div class='col-8 align-self-center px-2 pe-3'>
-                    <span class='h3'>Você ainda não tem perguntas, adicione!</span>
+                <div class='p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel' data-id='1' style='background-color: #E2E2E2'>
+                    <!-- Título da pergunta -->
+                    <div class='col-8 align-self-center px-2 pe-3'>
+                        <span class='h3'>Você ainda não tem perguntas, adicione!</span>
+                    </div>
                 </div>
-            </div>
     ATIVIDADE;   
 }
 
@@ -77,23 +78,24 @@ else{
         $temporariaQuantidade = $this->instanciaBancoDeDados->atividades[$contador]["Quantidade_Perguntas"];
         $temporariaUltimaTentativa = $this->instanciaBancoDeDados->atividades[$contador]["Ultima_Tentativa"] ?? "-";
         $htmlAtividades.=<<<ATIVIDADE
-            <div class='p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel' data-id='1' style='background-color: #E2E2E2'>
-                <!-- Título da pergunta -->
-                <div class='col-7 align-self-center px-2 pe-3'>
-                    <small class='fs-6'>$temporariaTexto</small>
+                <div class='p-1 my-1 d-flex rounded-4 border-2 border-dark campo-pergunta clicavel' data-id='1' style='background-color: #E2E2E2'>
+                    <!-- Título da pergunta -->
+                    <div class='col-7 align-self-center px-2 pe-3'>
+                        <small class='fs-6'>$temporariaTexto</small>
+                    </div>
+                    <!-- Informações sobre a pergunta -->
+                    <div class='col-5 px-2 align-self-center'>
+                        <small class='d-block'>Quantidade: $temporariaQuantidade</small>
+                        <small>Última Tentativa: $temporariaUltimaTentativa</small>
+                    </div>
                 </div>
-                <!-- Informações sobre a pergunta -->
-                <div class='col-5 px-2 align-self-center'>
-                    <small class='d-block'>Quantidade: $temporariaQuantidade</small>
-                    <small>Última Tentativa: $temporariaUltimaTentativa</small>
-                </div>
-            </div>
         ATIVIDADE;
     }
 }
 echo $htmlAtividades;
 
 ?>
+            </div>
         </div>
     </body>
 </html>
