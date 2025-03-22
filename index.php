@@ -31,6 +31,9 @@ class Index{
 		else if($diretorioAtual == "/cadastrar-atividade"){
 			require_once("App/adicionarAtividade.php");
 		}
+		else if($diretorioAtual == "/configuracoes"){
+			require_once("App/configuracoes.php");
+		}
 		else{
 			die("nada");
 		}

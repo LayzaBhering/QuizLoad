@@ -96,7 +96,7 @@ elemento_formulario.onsubmit = function(e){
 
 	if(elemento_pergunta_input.value == "" && elemento_botao_selecionado.value == "finalizar"){
 		if(confirm("Deseja realmente finalizar?")){
-			window.location.href = window.location.href.replace("/cadastrar-atividade", "/");
+			window.location.href = window.location.pathname("/");
 			return;
 		}
 		else{

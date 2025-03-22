@@ -42,8 +42,32 @@ class DataBase{
 		$this->conexaoBancoDeDados->query($sql);
 		$sql = "CREATE TABLE Alternativas (ID_Alternativa INTEGER PRIMARY KEY AUTO_INCREMENT, ID_Pergunta_Correspondente INTEGER, Texto_Alternativa VARCHAR (200), Correta BOOL);";
 		$this->conexaoBancoDeDados->query($sql);
-		$sql = "CREATE TABLE Configuracoes (Tempo_Default INTEGER, Aleatoriedade_Perguntas_Default BOOL, Aleatoriedade_Alternativas_Default BOOL);";
+		$sql = "CREATE TABLE Configuracoes (Modo_Pergunta_Default ENUM('Normal', 'Explicacao'), Aleatoriedade_Perguntas_Default BOOL, Aleatoriedade_Alternativas_Default BOOL, Tempo_Default INTEGER);";
 		$this->conexaoBancoDeDados->query($sql);
+		$sql = "INSERT INTO Configuracoes (Modo_Pergunta_Default, Aleatoriedade_Perguntas_Default, Aleatoriedade_Alternativas_Default, Tempo_Default) VALUE ('Normal', True, True, 30)";
+		$this->conexaoBancoDeDados->query($sql);
+	}
+
+	public function listarConfiguracoes(){
+		$sql = 'SELECT * FROM Configuracoes';
+		$retorno = $this->conexaoBancoDeDados->query($sql);
+
+		if($retorno == false && $retorno -> num_rows){
+			die('Erro ao consultar as configuraçẽos');
+		}
+
+		return $retorno->fetch_assoc();
+	}
+
+	public function atualizarConfiguracoes($modo, $pergunta, $alternativa, $duracao){
+		$sql = 'UPDATE Configuracoes SET Modo_Pergunta_Default = "'.$modo.'", Aleatoriedade_Perguntas_Default = "'.$pergunta.'", Aleatoriedade_Alternativas_Default = "'.$alternativa.'", Tempo_Default = '.$duracao.';';
+
+		$retorno = $this->conexaoBancoDeDados->query($sql);
+
+		if($retorno == false){
+			die('Erro ao atualizar as informações de configuração');
+		}
+
 	}
 
 	public function listarTodasAtividades(){

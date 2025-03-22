@@ -111,8 +111,12 @@ icones[3].addEventListener("click", ()=>{
 icones[4].addEventListener("click", ()=>{
 });
 
-icones[5].addEventListener("click", ()=>{
-	// Irei implementar
+icones[5].addEventListener("click", ()=>{	// Verificando se o popup está aberto
+	if(pop_up == true){
+		console.error("Pop Up aberto");
+		return;
+	}
+	window.location.pathname='/configuracoes'
 });
 
 // Adicionando evento nos campo de perguntas
